@@ -1,0 +1,45 @@
+<style>
+  textarea{
+    display:block;
+    width:100%;
+  }
+  .pass, .fail{
+    margin-bottom: .5em;
+    padding:1em;
+  }
+  .pass {
+    border: 2px solid green;
+  }
+  .fail {
+    border: 2px solid red;
+  }
+  .starter-code{
+    height:200px;
+    font:inherit;
+    font-family:Monaco, monospace;
+  }
+</style>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+<div class='questions'></div>
+<script src='app.js'></script>
+<script src='quiz.js'></script>
+<script type='text/x-handlebars' id='question'>
+  {{description}}
+  <br>
+  <textarea class='starter-code' data-solution="{{index}}">{{starterCode}}</textarea>
+  <button data-tests="{{index}}">check</button>
+  <div data-results="{{index}}"></div>
+</script>
+<script type='text/x-handlebars' id='assertions'>
+  {{#each assertions}}
+  <div class='{{status}}'>
+    {{description}}<br>
+    Expected {{expected}}.<br>
+    Got {{got}}
+  </div>
+  {{/each}}
+</script>
+<script>
+  var q = questions[0]
+  render(q)
+</script>
