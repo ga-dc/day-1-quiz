@@ -40,6 +40,11 @@
   {{/each}}
 </script>
 <script>
-  var q = questions[0]
-  render(q)
+  questions.forEach(render)
+  var buttons = document.querySelectorAll("[data-tests]")
+  Array.prototype.forEach.call(buttons, function (button, index) {
+    button.addEventListener("click", function () {
+      onCheckClick(questions[index])
+    })
+  })
 </script>
