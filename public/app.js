@@ -73,3 +73,10 @@ function onCheckClick (question) {
       return a + b
     })
 }
+
+var form = document.querySelector(".submit-quiz");
+form.addEventListener("submit", function(e){
+  e.preventDefault();
+  form.setAttribute("action", window.location.pathname + "/submit");
+  form.submit();
+});
