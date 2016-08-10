@@ -14,7 +14,9 @@ function describe(description, data){
     init: data.init || function () { this.assertions = [] },
     starterCode: data.starterCode.guts(),
     tests: data.tests,
-    index: questions.length
+    index: questions.length,
+    next: questions.length + 1,
+    prev: questions.length - 1,
   })
 }
 
@@ -29,6 +31,10 @@ function expect(context,description, expected, got){
 }
 
 function render(question){
+  question.total = questions.length;
+  if(question.index === (questions.length - 1) ){
+    question.next = "last"
+  }
   var source = document.getElementById("question").innerHTML
   var template = Handlebars.compile(source)
   document.querySelector(".questions").innerHTML += template(question)

@@ -1,34 +1,26 @@
-<style>
-  textarea{
-    display:block;
-    width:100%;
-  }
-  .pass, .fail{
-    margin-bottom: .5em;
-    padding:1em;
-  }
-  .pass {
-    border: 2px solid green;
-  }
-  .fail {
-    border: 2px solid red;
-  }
-  .starter-code{
-    height:200px;
-    font:inherit;
-    font-family:Monaco, monospace;
-  }
-</style>
+<link rel='stylesheet' type='text/css' href='styles.css'>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+<div class='page'>
+  <h1>Day 1 Quiz</h1>
+  <a href='#0'>Next</a>
+</div>
+<div class='page' id='last'>
+  <h1>Thanks</h1>
+</div>
 <div class='questions'></div>
 <script src='app.js'></script>
 <script src='quiz.js'></script>
 <script type='text/x-handlebars' id='question'>
-  {{description}}
-  <br>
-  <textarea class='starter-code' data-solution="{{index}}">{{starterCode}}</textarea>
-  <button data-tests="{{index}}">check</button>
-  <div data-results="{{index}}"></div>
+  <div class='page' id='{{index}}'>
+    <h2>{{description}}</h2>
+    <br>
+    <textarea class='starter-code' data-solution="{{index}}">{{starterCode}}</textarea>
+    <button data-tests="{{index}}">check</button>
+    <a href='#{{next}}' class='next'>Next &rarr;</a>
+    <div class='progress'>{{next}}/{{total}}</div>
+    <a href='#{{prev}}' class='prev'>&larr; Prev</a>
+    <div data-results="{{index}}"></div>
+  </div>
 </script>
 <script type='text/x-handlebars' id='assertions'>
   {{#each assertions}}
