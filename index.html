@@ -1,5 +1,9 @@
-<link rel='stylesheet' type='text/css' href='styles.css'>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+<!doctype html>
+<html>
+<head>
+  <link rel='stylesheet' type='text/css' href='styles.css'>
+</head>
+<body>
 <div class='page'>
   <h1>Day 1 Quiz</h1>
   <a href='#0'>Next</a>
@@ -8,8 +12,6 @@
   <h1>Thanks</h1>
 </div>
 <div class='questions'></div>
-<script src='app.js'></script>
-<script src='quiz.js'></script>
 <script type='text/x-handlebars' id='question'>
   <div class='page' id='{{index}}'>
     <h2>{{description}}</h2>
@@ -31,12 +33,17 @@
   </div>
   {{/each}}
 </script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+<script src='app.js'></script>
+<script src='quiz.js'></script>
 <script>
-  questions.forEach(render)
-  var buttons = document.querySelectorAll("[data-tests]")
-  Array.prototype.forEach.call(buttons, function (button, index) {
-    button.addEventListener("click", function () {
-      onCheckClick(questions[index])
-    })
+questions.forEach(render)
+var buttons = document.querySelectorAll("[data-tests]")
+Array.prototype.forEach.call(buttons, function (button, index) {
+  button.addEventListener("click", function () {
+    onCheckClick(questions[index])
   })
+})
 </script>
+</body>
+</html>
