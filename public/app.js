@@ -53,4 +53,13 @@ function onCheckClick (question) {
     var source = document.getElementById("assertions").innerHTML
     var template = Handlebars.compile(source)
     results.innerHTML = template({assertions: question.assertions})
+
+    var url = window.location.pathname + "/checkings"
+    var data = {
+      question: question.index,
+      solution: solution,
+      assertions: question.assertions,
+      createdAt: Date.now()
+    }
+    $.post(url, data);
 }
