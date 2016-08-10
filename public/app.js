@@ -17,12 +17,12 @@ function describe(description, data){
     index: questions.length,
     next: questions.length + 1,
     prev: questions.length - 1,
+    assertions: []
   })
 }
 
 function expect(context,description, expected, got){
-  context.assertions = context.assertions || []
-  context.assertions.push({
+  questions[context.index].assertions.push({
     status: expected == got ? "pass" : "fail",
     expected: expected,
     description: description,
@@ -38,12 +38,11 @@ function render(question){
   var source = document.getElementById("question").innerHTML
   var template = Handlebars.compile(source)
   document.querySelector(".questions").innerHTML += template(question)
-  document.q
 }
 
 function onCheckClick (question) {
     var solution = document.querySelector("[data-solution='"+question.index+"']").value
-    if (typeof question.init == "function")question.init.call(question)
+    if (typeof question.init == "function") question.init.call(question)
     try {
       eval(solution)
     }
@@ -53,7 +52,6 @@ function onCheckClick (question) {
     var source = document.getElementById("assertions").innerHTML
     var template = Handlebars.compile(source)
     results.innerHTML = template({assertions: question.assertions})
-
     var url = window.location.pathname + "/checkings"
     var data = {
       question: question.index,
@@ -62,4 +60,16 @@ function onCheckClick (question) {
       createdAt: Date.now()
     }
     $.post(url, data);
+    var score = document.querySelector(".js-score")
+    score.innerHTML = questions.map(function(question){
+      return question.assertions.filter(function(assertion){
+        return assertion.status == "pass"
+      }).length
+    }).reduce(function(a,b){
+      return a + b
+    }) + "/" + questions.map(function(question){
+      return question.assertions.length
+    }).reduce(function(a,b){
+      return a + b
+    })
 }
