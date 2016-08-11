@@ -18,16 +18,16 @@ app.get("/", function(req,res){
 
 app.get("/admin.json", function(req, res){
   Taking.find({}, function(err, takings){
-    // customTakings = takings.map(function(t){
-    //   var taking = t.toObject();
-    //   return {
-    //     name: taking.name,
-    //     duration: taking.completedAt - taking.createdAt,
-    //     score: score(taking.solutions)
-    //   }
-    // })
-    // res.json(customTakings);
-    res.json(takings);
+     customTakings = takings.map(function(t){
+       var taking = t.toObject();
+       return {
+         name: taking.name,
+         duration: (taking.completedAt - taking.createdAt)/ 1000,
+         score: score(taking.solutions)
+       }
+     })
+     res.json(customTakings);
+    //res.json(takings);
   })
 })
 

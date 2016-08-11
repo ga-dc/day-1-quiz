@@ -6,4 +6,9 @@ module.exports = function(solutions){
       return assertion.status == "pass";
     })
   })
+  var score = 0
+  for (var q in questions){
+    score += questions[q].correct.length
+  }
+  return score
 }
