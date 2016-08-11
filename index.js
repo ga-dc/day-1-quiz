@@ -6,18 +6,8 @@ var score = require("./score");
 
 mongoose.connect("mongodb://localhost/day-one-quiz");
 var TakingSchema = new mongoose.Schema({}, {strict: false});
-var Taking = mongoose.model("Taking", TakingSchema);
-
-app.use(express.static("public"));
-app.use(parser.urlencoded());
-app.set("view-engine", "hbs");
-
-app.get("/", function(req,res){
-  res.sendFile(__dirname + "/public/index.html");
-});
-
-app.get("/admin.json", function(req, res){
-  Taking.find({}, function(err, takings){
+TakingSchema.statics.summary = function(cb){
+  return Taking.find({}, function(err, takings){
      customTakings = takings.map(function(t){
        var taking = t.toObject();
        return {
@@ -26,8 +16,28 @@ app.get("/admin.json", function(req, res){
          score: score(taking.solutions)
        }
      })
-     res.json(customTakings);
-    //res.json(takings);
+     cb(customTakings)
+   })
+}
+var Taking = mongoose.model("Taking", TakingSchema);
+
+app.use(express.static("public"));
+app.use(parser.urlencoded());
+app.set("view engine", "hbs");
+
+app.get("/", function(req,res){
+  res.sendFile(__dirname + "/public/index.html");
+});
+
+app.get("/admin", function(req,res){
+  Taking.summary(function(takings){
+    res.render("admin", {takings: takings})
+  })
+});
+
+app.get("/admin.json", function(req, res){
+  Taking.summary(function(takings){
+     res.json(takings);
   })
 })
 

@@ -1,0 +1,11 @@
+<div class='sortables>
+  {{#each takings}}
+    <div class='sortable' data-score="{{this.score}}" data-duration="{{this.duration}}">
+    <h2>{{this.name}}</h2>
+    <strong>Score:</strong> {{this.score}}<br>
+    <strong>Duration:</strong> {{this.duration}}s<br>
+    <hr>
+  {{/each}}
+</div>
+<script src='https://npmcdn.com/isotope-layout@3.0.1/dist/isotope.pkgd.min.js'></script>
+<script></script>
