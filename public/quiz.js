@@ -46,12 +46,14 @@ describe("define a function named modulo that takes two arguments, it should ret
   tests: function () {
     let solution = document.querySelector("[data-solution='"+this.index+"']").value
     var modulo
-    eval(solution)
+    try{
+      eval(solution)
+    } catch(e){}
     try {
       expect(this, "the function modulo to be defined", 'function', typeof modulo)
       expect(this, "when we divide 4 by 3, should return remainder 1 ", 1, modulo(3,4))
       expect(this, "when we divide 7 by 5, should return remainder 2 ", 2, modulo(5,7))
-    } catch (e) {}   
+    } catch (e) {}
   }
 })
 describe("create an object", {
@@ -66,7 +68,9 @@ var pet = {
   },
   tests: function () {
     let solution = document.querySelector("[data-solution='"+this.index+"']").value
-    eval(solution)
+    try{
+      eval(solution)
+    } catch(e){}
     expect(this, "the variable pet should be an object", true, pet instanceof Object)
     expect(this, "the pet's species should be iguana", "iguana", pet.species)
     expect(this, "the pet's gender should be female", "female", pet.gender)
@@ -92,5 +96,43 @@ describe("write CSS for the following HTML", {
     let numClasses = solution.match(/#blue-circle/) || []
     expect(this, "number of id selectors to be 1", 1, numIds.length)
     expect(this, "number of class selectors to be 1", 1, numIds.length)
+  }
+})
+describe("Data Types and Conditionals", {
+  starterCode: function(){
+    // Create a variable named isRaining. Set it equal to true or false.
+    // If isRaining is true, print "Bring an umbrella" to the console.
+    // Otherwise, print "Bring some shades" to the console.
+  },
+  tests: function(){
+    let solution = document.querySelector("[data-solution='"+this.index+"']").value
+    var isRaining
+    let matches = solution.match(/(if|else)/g)
+    try{
+      eval(solution)
+    } catch(e){}
+    expect(this, "the variable isRaining should be a boolean", true, typeof isRaining == "boolean")
+    expect(this, "there is an if-else statement", true, matches && matches.length >= 2)
+  }
+})
+describe("Selecting Elements", {
+  starterCode: function(){
+    // Define a function named getListItems that returns all the <li>'s on the page.
+    function getListItems(){
+
+    }
+  },
+  tests: function(){
+    let solution = document.querySelector("[data-solution='"+this.index+"']").value
+    var getListItems
+    try{
+      eval(solution)
+    } catch(e){}
+    var lis = getListItems()
+    lis = lis || {}
+    lis.constructor = lis.constructor || {}
+    expect(this, "getListItems is a function", true, typeof getListItems == "function")
+    expect(this, "return value of getListItems is a list of elements", "NodeList", lis.constructor.name)
+    expect(this, "getListItems NodeList has a length of 3", 3, lis.length)
   }
 })

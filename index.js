@@ -41,6 +41,12 @@ app.get("/admin.json", function(req, res){
   })
 })
 
+app.get("/raw.json", function(req, res){
+  Taking.find({}, function(err, takings){
+     res.json(takings);
+  })
+})
+
 app.get("/thanks", function(req, res){
   res.sendFile(__dirname + "/public/thanks.html");
 })

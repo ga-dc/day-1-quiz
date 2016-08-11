@@ -11,6 +11,9 @@
     <input name='name' id='name'>
     <button type='submit'>Start Quiz</button>
   </form>
+  <div style="display: none">
+    <ul><li></li><li></li><li></li></ul>
+  </div>
 </div>
 <div class='page' id='last'>
   <h1>Thanks</h1>
@@ -27,7 +30,7 @@
     <br>
     <textarea class='starter-code' data-solution="{{index}}">{{starterCode}}</textarea>
     <button data-tests="{{index}}">check</button>
-    <a href='#{{next}}' class='next'>Next &rarr;</a>
+    <a href='#{{next}}' class='next' data-trigger="{{index}}">Next &rarr;</a>
     <div class='progress'>{{next}}/{{total}}</div>
     <a href='#{{prev}}' class='prev'>&larr; Prev</a>
     <div data-results="{{index}}"></div>
@@ -52,6 +55,14 @@ var buttons = document.querySelectorAll("[data-tests]")
 Array.prototype.forEach.call(buttons, function (button, index) {
   button.addEventListener("click", function () {
     onCheckClick(questions[index])
+  })
+})
+
+var nextButtons = document.querySelectorAll("[data-trigger]");
+console.log(nextButtons)
+Array.prototype.forEach.call(nextButtons, function(button){
+  button.addEventListener("click", function(e){
+    onCheckClick(questions[parseInt(e.target.getAttribute("data-trigger"))]);
   })
 })
 </script>
