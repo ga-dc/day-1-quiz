@@ -4,22 +4,9 @@ var mongoose = require("mongoose");
 var parser = require("body-parser");
 var score = require("./score");
 var fs = require("fs")
-mongoose.connect("mongodb://localhost/day-one-quiz");
-var TakingSchema = new mongoose.Schema({}, {strict: false});
-TakingSchema.statics.summary = function(cb){
-  return Taking.find({}, function(err, takings){
-     customTakings = takings.map(function(t){
-       var taking = t.toObject();
-       return {
-         name: taking.name,
-         duration: (taking.completedAt - taking.createdAt)/ 1000,
-         score: score(taking.solutions)
-       }
-     })
-     cb(customTakings)
-   })
-}
-var Taking = mongoose.model("Taking", TakingSchema);
+var Taking = require("./db/connection")
+
+
 
 app.use(express.static("public"));
 app.use(parser.urlencoded( { extended: true } ));
@@ -33,28 +20,37 @@ app.get("/", function(req,res){
   res.render("index", {quizzes: quizzes})
 });
 
-app.get("/:id", function (req, res) {
-  var quizNo = req.params.id
-  res.render("quiz", { quiz: quizNo })
-})
-
 app.get("/admin", function(req,res){
-  Taking.summary(function(takings){
-    res.render("admin", {takings: takings})
+  var quizzes = fs.readdirSync(__dirname + "/public/quizzes")
+  quizzes = quizzes.map( quiz => {
+    return quiz.replace(".js", "")
   })
+  res.render("admin", {quizzes})
 });
-
-app.get("/admin.json", function(req, res){
-  Taking.summary(function(takings){
-     res.json(takings);
-  })
-})
 
 app.get("/raw.json", function(req, res){
   Taking.find({}, function(err, takings){
      res.json(takings);
   })
 })
+
+app.get("/admin/:quiz", function (req, res) {
+  var quizNo = req.params.quiz
+  Taking.summary(quizNo, function (takings) {
+    res.render("admin", {takings})
+  })
+})
+
+app.get("/:id", function (req, res) {
+  var quizNo = req.params.id
+  res.render("quiz", { quiz: quizNo })
+})
+
+
+
+
+
+
 
 app.get("/thanks", function(req, res){
   res.sendFile(__dirname + "/public/thanks.html");

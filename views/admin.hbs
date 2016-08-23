@@ -1,4 +1,8 @@
-<div class='sortables>
+<div class='sortables'>
+  {{#each quizzes}}
+    {{this}}
+  {{/each}}
+
   {{#each takings}}
     <div class='sortable' data-score="{{this.score}}" data-duration="{{this.duration}}">
     <h2>{{this.name}}</h2>
