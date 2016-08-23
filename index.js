@@ -6,8 +6,6 @@ var score = require("./score");
 var fs = require("fs")
 var Taking = require("./db/connection")
 
-
-
 app.use(express.static("public"));
 app.use(parser.urlencoded( { extended: true } ));
 app.set("view engine", "hbs");
@@ -74,6 +72,12 @@ app.post("/checkpoints/:id/:taking/checkings", function(req, res){
 app.post("/checkpoints/:id/:taking/submit", function(req, res){
   Taking.findOneAndUpdate({_id: req.params.taking}, {completedAt: Date.now()}, {new: true}).then(function(taking){
     res.redirect(`/${req.params.id}/${req.params.taking}/thanks`);
+  })
+})
+
+app.delete("/takings/:id", (req,res) => {
+  Taking.remove({_id:req.params.id}, _ => {
+    res.json("")
   })
 })
 

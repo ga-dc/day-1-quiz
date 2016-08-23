@@ -10,7 +10,8 @@ TakingSchema.statics.summary = function(quizNo, cb){
        return {
          name: taking.name,
          duration: (taking.completedAt - taking.createdAt)/ 1000,
-         score: score(taking.solutions)
+         score: score(taking.solutions),
+	 _id: t._id
        }
      })
      cb(customTakings)

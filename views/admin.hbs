@@ -1,15 +1,32 @@
 <div class='sortables'>
+<ul>
   {{#each quizzes}}
-    {{this}}
+      <li><a href='/admin/{{this}}'>{{this}}</a></li>
   {{/each}}
-
+</ul>
   {{#each takings}}
     <div class='sortable' data-score="{{this.score}}" data-duration="{{this.duration}}">
+    <a href='#' data-delete='{{this._id}}' class='delete js-delete'>&times;</a>
     <h2>{{this.name}}</h2>
     <strong>Score:</strong> {{this.score}}<br>
     <strong>Duration:</strong> {{this.duration}}s<br>
     <hr>
+    </div>
   {{/each}}
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+  <script>
+    var deletes = document.querySelectorAll(".js-delete")
+    Array.prototype.forEach.call(deletes, del => {
+      del.addEventListener("click", event => {
+        var id = del.getAttribute("data-delete")
+        $.ajax({
+	  url: '/takings/' + id,
+	  method: 'delete',
+	  success(){
+	    event.target.parentNode.parentNode.removeChild(event.target.parentNode)
+	  }
+	})
+      })
+    })
+  </script>
 </div>
-<script src='https://npmcdn.com/isotope-layout@3.0.1/dist/isotope.pkgd.min.js'></script>
-<script></script>
