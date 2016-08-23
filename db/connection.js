@@ -17,6 +17,15 @@ TakingSchema.statics.summary = function(quizNo, cb){
    })
 }
 
+TakingSchema.methods.summary = function(){
+   var taking = this.toObject();
+   return {
+     name: taking.name,
+     duration: (taking.completedAt - taking.createdAt)/ 1000,
+     score: score(taking.solutions)
+   }
+}
+
 var Taking = mongoose.model("Taking", TakingSchema);
 
 module.exports = Taking;

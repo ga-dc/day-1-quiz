@@ -28,8 +28,8 @@ app.get("/admin", function(req,res){
   res.render("admin", {quizzes})
 });
 
-app.get("/raw.json", function(req, res){
-  Taking.find({}, function(err, takings){
+app.get("/raw/:id", function(req, res){
+  Taking.find({_id:req.params.id}, function(err, takings){
      res.json(takings);
   })
 })
@@ -41,19 +41,15 @@ app.get("/admin/:quiz", function (req, res) {
   })
 })
 
+app.get("/:id/:taking/thanks", function(req, res){
+  Taking.findOne({_id: req.params.taking}, (_,doc) => {
+    res.render("thanks",doc.summary())
+  })
+})
+
 app.get("/:id", function (req, res) {
   var quizNo = req.params.id
   res.render("quiz", { quiz: quizNo })
-})
-
-
-
-
-
-
-
-app.get("/thanks", function(req, res){
-  res.sendFile(__dirname + "/public/thanks.html");
 })
 
 app.get("/checkpoints/:id/:taking", function(req, res){
@@ -61,7 +57,6 @@ app.get("/checkpoints/:id/:taking", function(req, res){
     var taking = req.params.taking
     res.render("quiz", {quiz: quizNo, taking })
 })
-
 
 app.post("/checkpoints/:id/submissions", function(req, res){
   Taking.create({name: req.body.name, createdAt: Date.now(), solutions: [], quizNo: req.params.id }).then(function(taking){
@@ -76,9 +71,9 @@ app.post("/checkpoints/:id/:taking/checkings", function(req, res){
   })
 })
 
-app.post("/checkpoints/:id/submit", function(req, res){
-  Taking.findOneAndUpdate({_id: req.params.id}, {completedAt: Date.now()}, {new: true}).then(function(taking){
-    res.redirect("/thanks");
+app.post("/checkpoints/:id/:taking/submit", function(req, res){
+  Taking.findOneAndUpdate({_id: req.params.taking}, {completedAt: Date.now()}, {new: true}).then(function(taking){
+    res.redirect(`/${req.params.id}/${req.params.taking}/thanks`);
   })
 })
 
