@@ -1,12 +1,12 @@
 <!doctype html>
 <html>
 <head>
-  <link rel='stylesheet' type='text/css' href='styles.css'>
+  <link rel='stylesheet' type='text/css' href='/styles.css'>
 </head>
 <body>
 <div class='page'>
   <h1>Day 1 Quiz</h1>
-  <form method="post" action="/submissions">
+  <form method="post" action="/checkpoints/{{quiz}}/submissions">
     <label for='name'>Your name</label>
     <input name='name' id='name'>
     <button type='submit'>Start Quiz</button>
@@ -25,30 +25,30 @@
 </div>
 <div class='questions'></div>
 <script type='text/x-handlebars' id='question'>
-  <div class='page' id='{{index}}'>
-    <h2>{{description}}</h2>
+  <div class='page' id='\{{index}}'>
+    <h2>\{{description}}</h2>
     <br>
-    <textarea class='starter-code' data-solution="{{index}}">{{starterCode}}</textarea>
-    <button data-tests="{{index}}">check</button>
-    <a href='#{{next}}' class='next' data-trigger="{{index}}">Next &rarr;</a>
-    <div class='progress'>{{next}}/{{total}}</div>
-    <a href='#{{prev}}' class='prev'>&larr; Prev</a>
-    <div data-results="{{index}}"></div>
+    <textarea class='starter-code' data-solution="\{{index}}">\{{starterCode}}</textarea>
+    <button data-tests="\{{index}}">check</button>
+    <a href='#\{{next}}' class='next' data-trigger="\{{index}}">Next &rarr;</a>
+    <div class='progress'>\{{next}}/\{{total}}</div>
+    <a href='#\{{prev}}' class='prev'>&larr; Prev</a>
+    <div data-results="\{{index}}"></div>
   </div>
 </script>
 <script type='text/x-handlebars' id='assertions'>
-  {{#each assertions}}
-  <div class='{{status}}'>
-    {{description}}<br>
-    Expected {{expected}}.<br>
-    Got {{got}}
+  \{{#each assertions}}
+  <div class='\{{status}}'>
+    \{{description}}<br>
+    Expected \{{expected}}.<br>
+    Got \{{got}}
   </div>
-  {{/each}}
+  \{{/each}}
 </script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<script src='app.js'></script>
-<script src='quiz.js'></script>
+<script src='/app.js'></script>
+<script src='/quizzes/{{quiz}}.js'></script>
 <script>
 questions.forEach(render)
 var buttons = document.querySelectorAll("[data-tests]")
