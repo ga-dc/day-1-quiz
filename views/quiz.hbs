@@ -1,23 +1,18 @@
-<!doctype html>
-<html>
-<head>
-  <link rel='stylesheet' type='text/css' href='/styles.css'>
-</head>
-<body>
 <div class='page'>
-  <h1>Day 1 Quiz</h1>
+  <h1>Week {{quiz}} Checkpoint</h1>
   <form method="post" action="/checkpoints/{{quiz}}/submissions">
     <label for='name'>Your name</label>
     <input name='name' id='name'>
-    <button type='submit'>Start Quiz</button>
+    <button type='submit'>Start</button>
   </form>
   <div style="display: none">
     <ul><li></li><li></li><li></li></ul>
   </div>
 </div>
 <div class='page' id='last'>
-  <h1>Thanks</h1>
-  Current score is <span class='js-score'></span><br>
+  <h2>Current Score</h2>
+  <span class='js-score'></span><br>
+  <br>
   <form class="submit-quiz" method="post">
     <button>Submit Results</button>
   </form>
@@ -67,5 +62,3 @@ Array.prototype.forEach.call(nextButtons, function(button){
   })
 })
 </script>
-</body>
-</html>

@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Quiz App</title>
-  </head>
-  <body>
-    <div class="container">
-      {{#each quizzes}}
-        <a href={{this}}>{{this}}</a>
-      {{/each}}
-    </div>
-
-  </body>
-</html>
+<div class='container'>
+  <h1>Checkpoints</h1>
+  <p>Choose a diagnostic</p>
+  <ul>
+  {{#each quizzes}}
+    <li><a href={{this}}>Week {{this}}</a></li>
+  {{/each}}
+  </ul>
+</div>
