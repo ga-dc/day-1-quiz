@@ -9,7 +9,8 @@ var Taking = require("./db/connection")
 app.use(express.static("public"));
 app.use(parser.urlencoded( { extended: true } ));
 app.set("view engine", "hbs");
-app.set("port", process.env.port || 2666 )
+console.log(process.env);
+app.set("port", process.env.PORT || 2666 )
 
 app.get("/", function(req,res){
   var quizzes = fs.readdirSync(__dirname + "/public/quizzes")
