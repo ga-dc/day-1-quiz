@@ -1,8 +1,8 @@
 <div class='page'>
   <h1>Week {{quiz}} Checkpoint</h1>
   <form method="post" action="/checkpoints/{{quiz}}/submissions">
-    <label for='name'>Your name</label>
-    <input name='name' id='name'>
+    <label for='name'>Your Full Name</label>
+    <input name='name' id='name' required>
     <button type='submit'>Start</button>
   </form>
   <div style="display: none">

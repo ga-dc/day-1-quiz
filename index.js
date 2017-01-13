@@ -18,7 +18,7 @@ app.get("/", function(req,res){
   res.render("index", {quizzes: quizzes})
 });
 
-app.get("/admin", function(req,res){
+app.get("/_admin", function(req,res){
   var quizzes = fs.readdirSync(__dirname + "/public/quizzes")
   quizzes = quizzes.map( quiz => {
     return quiz.replace(".js", "")
@@ -32,7 +32,7 @@ app.get("/raw/:id", function(req, res){
   })
 })
 
-app.get("/admin/:quiz", function (req, res) {
+app.get("/_admin/:quiz", function (req, res) {
   var quizNo = req.params.quiz
   Taking.summary(quizNo, function (takings) {
     res.render("admin", {takings})
@@ -81,4 +81,4 @@ app.delete("/takings/:id", (req,res) => {
   })
 })
 
-app.listen(3000);
+app.listen(2666);
