@@ -9,7 +9,6 @@ var Taking = require("./db/connection")
 app.use(express.static("public"));
 app.use(parser.urlencoded( { extended: true } ));
 app.set("view engine", "hbs");
-console.log(process.env);
 app.set("port", process.env.PORT || 2666 )
 
 app.get("/", function(req,res){
