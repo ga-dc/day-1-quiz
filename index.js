@@ -9,6 +9,7 @@ var Taking = require("./db/connection")
 app.use(express.static("public"));
 app.use(parser.urlencoded( { extended: true } ));
 app.set("view engine", "hbs");
+app.set("port", process.env.port || 2666 )
 
 app.get("/", function(req,res){
   var quizzes = fs.readdirSync(__dirname + "/public/quizzes")
@@ -81,4 +82,6 @@ app.delete("/takings/:id", (req,res) => {
   })
 })
 
-app.listen(2666);
+app.listen(app.get('port'), () => {
+  console.log(`listening on port: ${app.get('port')}`);
+});

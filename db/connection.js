@@ -1,6 +1,7 @@
 var mongoose = require("mongoose");
-var score = require("../score") 
-mongoose.connect("mongodb://localhost/quiz");
+var score = require("../score")
+
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/quiz");
 
 var TakingSchema = new mongoose.Schema({}, {strict: false});
 TakingSchema.statics.summary = function(quizNo, cb){
