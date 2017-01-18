@@ -40,7 +40,7 @@ describe("fix the following html", {
 
   }
 })
-describe("define a function named modulo that takes two arguments, it should return the remainder of divding the first argument by the second", {
+describe("define a function named modulo that takes two arguments, it should return the remainder of dividing the second argument by the first", {
   starterCode: function () {
   },
   tests: function () {
