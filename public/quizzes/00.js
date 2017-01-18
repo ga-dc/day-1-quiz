@@ -82,7 +82,7 @@ var pet = {
 describe("write CSS for the following HTML", {
   starterCode: function () {
     `<div class='red-square'></div>
-<!-- should be a red squre -->
+<!-- should be a red square -->
 <div id='blue-circle'></div>
 <!-- should be a blue circle -->
 <style>
@@ -118,9 +118,6 @@ describe("Data Types and Conditionals", {
 describe("Selecting Elements", {
   starterCode: function(){
     // Define a function named getListItems that returns all the <li>'s on the page.
-    function getListItems(){
-
-    }
   },
   tests: function(){
     let solution = document.querySelector("[data-solution='"+this.index+"']").value
