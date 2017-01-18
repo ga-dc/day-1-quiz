@@ -118,6 +118,9 @@ describe("Data Types and Conditionals", {
 describe("Selecting Elements", {
   starterCode: function(){
     // Define a function named getListItems that returns all the <li>'s on the page.
+    function getListItems(){
+      
+    }
   },
   tests: function(){
     let solution = document.querySelector("[data-solution='"+this.index+"']").value
